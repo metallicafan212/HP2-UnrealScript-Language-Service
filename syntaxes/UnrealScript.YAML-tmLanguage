@@ -447,7 +447,7 @@ repository:
     begin: (?=\b((?i)class|interface)\b)
     end: (?<=\;)
     patterns:
-      - begin: ((?i)class|interface)\s+(?<id>\w+)\s*(?:((?i)extends|expands)\s+(?:(\w+)(?:\s*(\.)\s*(\w+))?))?\s*(?:((?i)within)\s+(?:(\w+)(?:\s*(\.)\s*(\w+))?))?
+      - begin: ((?i)class|interface)\s+(?<id>\w+)\s*(?:((?i)extends|expands|based on)\s+(?:(\w+)(?:\s*(\.)\s*(\w+))?))?\s*(?:((?i)within)\s+(?:(\w+)(?:\s*(\.)\s*(\w+))?))?
         beginCaptures:
           '1':
             name: keyword.other.class.uc
