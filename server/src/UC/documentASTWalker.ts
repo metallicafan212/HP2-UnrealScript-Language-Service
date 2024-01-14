@@ -272,6 +272,8 @@ const TypeKeywordToTypeKindMap: { [key: number]: UCTypeKind } = {
     // Metallicafan212: New types
     [UCLexer.KW_PTR]:       UCTypeKind.Ptr,
     [UCLexer.KW_DOUBLE]:    UCTypeKind.Double,
+    [UCLexer.KW_QWORD]:     UCTypeKind.QWORD,
+    [UCLexer.KW_LAZYARRAY]: UCTypeKind.LazyArray,
 };
 
 export class DocumentASTWalker extends AbstractParseTreeVisitor<any> implements UCPreprocessorParserVisitor<any>, UCParserVisitor<any> {
