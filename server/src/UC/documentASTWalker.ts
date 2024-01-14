@@ -267,7 +267,11 @@ const TypeKeywordToTypeKindMap: { [key: number]: UCTypeKind } = {
     [UCLexer.KW_NAME]: UCTypeKind.Name,
     [UCLexer.KW_BOOL]: UCTypeKind.Bool,
     [UCLexer.KW_POINTER]: UCTypeKind.Pointer,
-    [UCLexer.KW_BUTTON]: UCTypeKind.Button
+    [UCLexer.KW_BUTTON]: UCTypeKind.Button,
+
+    // Metallicafan212: New types
+    [UCLexer.KW_PTR]:       UCTypeKind.Ptr,
+    [UCLexer.KW_DOUBLE]:    UCTypeKind.Double,
 };
 
 export class DocumentASTWalker extends AbstractParseTreeVisitor<any> implements UCPreprocessorParserVisitor<any>, UCParserVisitor<any> {
@@ -703,7 +707,7 @@ export class DocumentASTWalker extends AbstractParseTreeVisitor<any> implements 
                     break;
                 case UCGrammar.UCParser.KW_CONST:
                     modifiers |= ModifierFlags.ReadOnly;
-                    break;
+                    break;				
                 case UCGrammar.UCParser.KW_PROTECTED:
                     modifiers |= ModifierFlags.Protected;
                     break;
@@ -742,6 +746,15 @@ export class DocumentASTWalker extends AbstractParseTreeVisitor<any> implements 
                     break;
                 case UCGrammar.UCParser.KW_TRANSIENT:
                     modifiers |= ModifierFlags.Transient;
+                    break;
+
+                // Metallicafan212: HP2 (and UE1)
+                case UCGrammar.UCParser.KW_EXEC:
+                    modifiers |= MethodFlags.Exec;
+                    break;
+                
+                case UCGrammar.UCParser.KW_ALLOWEDINMENUS:
+                    modifiers |= MethodFlags.AllowedInMenus;
                     break;
             }
         }
@@ -939,6 +952,37 @@ export class DocumentASTWalker extends AbstractParseTreeVisitor<any> implements 
                     case UCGrammar.UCParser.KW_TRANSIENT:
                         modifiers |= ModifierFlags.Transient;
                         break;
+						
+					// Metallicafan212:	New keywords
+					//					No flags defined atm
+					case UCGrammar.UCParser.KW_EDITCONST:
+                        modifiers |= ModifierFlags.EditConst;
+						break;
+					
+					case UCGrammar.UCParser.KW_HIDDEN:
+                        modifiers |= ModifierFlags.Hidden;
+						break;
+						
+					case UCGrammar.UCParser.KW_NOTIMESCALE:
+                        modifiers |= ModifierFlags.NoTimeScale;
+						break;
+						
+					case UCGrammar.UCParser.KW_NOPERSISTENT:
+                        modifiers |= ModifierFlags.NoPersistent;
+						break;
+
+                    case UCGrammar.UCParser.KW_DOUBLESIZE:
+                        modifiers |= ModifierFlags.DoubleSize;
+                        break;
+                    
+                    case UCGrammar.UCParser.KW_EIGHTBYTEALIGN:
+                        modifiers |= ModifierFlags.EightByteAlign;
+                        break;
+
+                    case UCGrammar.UCParser.KW_UNSIGNED:
+                        modifiers |= ModifierFlags.Unsigned;
+                        break;
+                    
                 }
             }
         }

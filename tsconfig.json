@@ -6,6 +6,7 @@
             "ES2022"
         ],
         "module": "NodeNext",
+		"moduleResolution": "NodeNext",
         "plugins": [
             {
                 "name": "typescript-eslint-language-service"

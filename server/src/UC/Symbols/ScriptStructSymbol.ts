@@ -1,4 +1,4 @@
-import { Name } from 'UC/name';
+import { Name } from '../name';
 import { UCDocument } from '../document';
 import { SymbolWalker } from '../symbolWalker';
 import { ContextKind, ISymbol, ModifierFlags, UCFieldSymbol, UCObjectSymbol, UCStructSymbol, UCSymbolKind, UCTypeKind } from './';

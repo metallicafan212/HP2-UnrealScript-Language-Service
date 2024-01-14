@@ -1,56 +1,5 @@
 import { DiagnosticSeverity, Range } from 'vscode-languageserver';
 
-import {
-    ArrayIterator,
-    Array_LengthProperty,
-    ClassModifierFlags,
-    ContextInfo,
-    ITypeSymbol,
-    IntrinsicClass,
-    IntrinsicEnum,
-    MethodFlags,
-    ModifierFlags,
-    StaticBoolType,
-    StaticDelegateType,
-    StaticIntType,
-    StaticMetaType,
-    StaticNameType,
-    TypeKindToName,
-    UCArchetypeSymbol,
-    UCArrayTypeSymbol,
-    UCClassSymbol,
-    UCConstSymbol,
-    UCConversionCost,
-    UCDelegateSymbol,
-    UCDelegateTypeSymbol,
-    UCEnumMemberSymbol,
-    UCEnumSymbol,
-    UCFieldSymbol,
-    UCInterfaceSymbol,
-    UCMatchFlags,
-    UCMethodSymbol,
-    UCObjectTypeSymbol,
-    UCParamSymbol,
-    UCPropertySymbol,
-    UCQualifiedTypeSymbol,
-    UCScriptStructSymbol,
-    UCStateSymbol,
-    UCStructSymbol,
-    UCSymbolKind,
-    UCTypeKind,
-    areMethodsCompatibleWith,
-    getConversionCost,
-    isClass,
-    isDelegateSymbol,
-    isEnumSymbol,
-    isEnumTagSymbol,
-    isField,
-    isFunction,
-    isMethodSymbol,
-    isStateSymbol,
-    resolveType,
-    typesMatch,
-} from '../Symbols';
 import { UCDocument } from '../document';
 import {
     IExpression,
@@ -96,6 +45,57 @@ import {
     UCSwitchStatement,
     UCWhileStatement,
 } from '../statements';
+import {
+    areMethodsCompatibleWith,
+    Array_LengthProperty,
+    ArrayIterator,
+    ClassModifierFlags,
+    ContextInfo,
+    getConversionCost,
+    IntrinsicClass,
+    IntrinsicEnum,
+    isClass,
+    isDelegateSymbol,
+    isEnumSymbol,
+    isEnumTagSymbol,
+    isField,
+    isFunction,
+    isMethodSymbol,
+    isStateSymbol,
+    ITypeSymbol,
+    MethodFlags,
+    ModifierFlags,
+    resolveType,
+    StaticBoolType,
+    StaticDelegateType,
+    StaticIntType,
+    StaticMetaType,
+    StaticNameType,
+    TypeKindToName,
+    typesMatch,
+    UCArchetypeSymbol,
+    UCArrayTypeSymbol,
+    UCClassSymbol,
+    UCConstSymbol,
+    UCConversionCost,
+    UCDelegateSymbol,
+    UCDelegateTypeSymbol,
+    UCEnumMemberSymbol,
+    UCEnumSymbol,
+    UCFieldSymbol,
+    UCInterfaceSymbol,
+    UCMatchFlags,
+    UCMethodSymbol,
+    UCObjectTypeSymbol,
+    UCParamSymbol,
+    UCPropertySymbol,
+    UCQualifiedTypeSymbol,
+    UCScriptStructSymbol,
+    UCStateSymbol,
+    UCStructSymbol,
+    UCSymbolKind,
+    UCTypeKind,
+} from '../Symbols';
 import { DefaultSymbolWalker } from '../symbolWalker';
 import { DiagnosticCollection, IDiagnosticMessage } from './diagnostic';
 import * as diagnosticMessages from './diagnosticMessages.json';
@@ -1051,7 +1051,11 @@ export class DocumentAnalyzer extends DefaultSymbolWalker<void> {
                     | 1 << UCTypeKind.Name
                     | 1 << UCTypeKind.String
                     | 1 << UCTypeKind.Button
-                    | 1 << UCTypeKind.Struct;
+                    | 1 << UCTypeKind.Struct
+					
+					// Metallicafan212: Add on the HP2 types
+					| 1 << UCTypeKind.Double
+					;
 
                 if ((1 << argumentTypeKind & typesToCheck) !== 0
                     && getConversionCost(argumentType, type) === UCConversionCost.Zero) {

@@ -64,3 +64,13 @@ export const NAME_RETURNVALUE = toName('ReturnValue');
 export const NAME_SPAWN = toName('Spawn');
 
 export const NAME_TYPE = toName('Type');
+
+// Metallicafan212: New names
+export const NAME_EDITCONST = toName('EditConst');
+export const NAME_HIDDEN = toName('Hidden');
+export const NAME_PTR = toName('Ptr');
+export const NAME_PTRPROPERTY = toName('PtrProperty');
+
+export const NAME_DOUBLE = toName('Double');
+export const NAME_QWORD = toName('QWORD');
+export const NAME_LAZYARRAY = toName('LazyArray');

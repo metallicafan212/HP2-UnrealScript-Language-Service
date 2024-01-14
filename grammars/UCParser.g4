@@ -134,6 +134,12 @@ identifier
 	| 'noexport'
 	| 'noexportheader'
 	| 'editconst'
+
+	// Metallicafan212: New flags
+	| 'hidden'
+	| 'nopersistent'
+	| 'notimescale'
+
 	| 'edfindable'
 	| 'editinline'
 	| 'editinlinenotify'
@@ -534,6 +540,14 @@ variableModifier
 	| 'editinlineuse'
 	| 'editconstarray'
 	| 'edfindable'
+	// Metallicafan212: HP2
+	| 'hidden'
+	| 'nopersistent'
+	| 'notimescale'
+	| 'doublesize'
+	| 'eightbytealign'
+	| 'unsigned'
+
     // UC2+
     // | 'nonlocalized'
 	// UC3
@@ -586,10 +600,15 @@ primitiveType
 	: 'byte'
 	| 'int'
 	| 'float'
+	| 'double'
 	| 'bool'
 	| 'name'
 	| 'pointer'
+	| 'map'
+	| 'ptr'
 	| 'button' // alias for a string with an input modifier
+	| 'qword'
+	| 'lazyarray'
 	;
 
 stringType
@@ -688,6 +707,10 @@ functionSpecifier
 	| 'latent'
 	| 'singular'
 	| 'iterator'
+
+	// Metallicafan212: HP2 specific
+	| 'allowedinmenus'
+
 	// UC3
 	| 'const'
 	| 'noexport'

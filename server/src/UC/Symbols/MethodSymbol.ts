@@ -1,6 +1,6 @@
+import { Token } from 'antlr4ts/Token';
 import { Location, Position } from 'vscode-languageserver-types';
 
-import { Token } from 'antlr4ts/Token';
 import { UCDocument } from '../document';
 import { Name } from '../name';
 import { NAME_ACTOR, NAME_ENGINE, NAME_SPAWN } from '../names';
@@ -8,6 +8,7 @@ import { SymbolWalker } from '../symbolWalker';
 import {
     ContextKind,
     DEFAULT_RANGE,
+    isFunction,
     ISymbol,
     ModifierFlags,
     UCFieldSymbol,
@@ -16,7 +17,6 @@ import {
     UCStructSymbol,
     UCSymbolKind,
     UCTypeKind,
-    isFunction,
 } from './';
 
 export enum MethodFlags {
@@ -33,6 +33,10 @@ export enum MethodFlags {
     // Implies Final
     Static = 1 << 7,
     Final = 1 << 8,
+
+    // Metallicafan212: HP2 (and UE1)
+    Exec = 1 << 9,
+    AllowedInMenus = 1 << 10,
 
     OperatorKind = Operator | PreOperator | PostOperator,
     HasKind = Function | OperatorKind | Event | Delegate,

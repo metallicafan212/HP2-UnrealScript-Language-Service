@@ -11,16 +11,20 @@ import {
     NAME_BUTTON,
     NAME_BYTE,
     NAME_DELEGATE,
+    NAME_DOUBLE,
     NAME_ENUM,
     NAME_ERROR,
     NAME_FLOAT,
     NAME_INT,
     NAME_INTERFACE,
+    NAME_LAZYARRAY,
     NAME_MAP,
     NAME_NAME,
     NAME_NONE,
     NAME_OBJECT,
     NAME_POINTER,
+    NAME_PTR,
+    NAME_QWORD,
     NAME_RANGE,
     NAME_ROTATOR,
     NAME_STRING,
@@ -35,16 +39,18 @@ import {
     ContextInfo,
     DEFAULT_IDENTIFIER,
     DEFAULT_RANGE,
+    Identifier,
     INode,
+    IntrinsicArray,
     ISymbol,
     IWithIndex,
     IWithInnerSymbols,
     IWithReference,
-    Identifier,
-    IntrinsicArray,
     ModifierFlags,
     ObjectsTable,
     SymbolReference,
+    tryFindClassSymbol,
+    tryFindSymbolInPackage,
     UCArchetypeSymbol,
     UCBaseOperatorSymbol,
     UCClassSymbol,
@@ -61,8 +67,6 @@ import {
     UCScriptStructSymbol,
     UCStateSymbol,
     UCStructSymbol,
-    tryFindClassSymbol,
-    tryFindSymbolInPackage
 } from './';
 
 export const enum UCNodeKind {
@@ -121,7 +125,13 @@ export const enum UCTypeKind {
     // <= UC2
     Pointer,
     // == UC2
-    Button
+    Button,
+
+    // Metallicafan212: HP2
+    Ptr,
+    Double,
+    QWORD,
+    LazyArray,
 }
 
 export const TypeKindToName: Readonly<Map<UCTypeKind, Name>> = new Map([
@@ -144,6 +154,11 @@ export const TypeKindToName: Readonly<Map<UCTypeKind, Name>> = new Map([
     [UCTypeKind.Array, NAME_ARRAY],
     [UCTypeKind.Pointer, NAME_POINTER],
     [UCTypeKind.Button, NAME_BUTTON],
+    // Metallicafan212: HP2
+    [UCTypeKind.Ptr, NAME_PTR],
+    [UCTypeKind.Double, NAME_DOUBLE],
+    [UCTypeKind.QWORD, NAME_QWORD],
+    [UCTypeKind.LazyArray, NAME_LAZYARRAY],
 ]);
 
 export interface ITypeSymbol extends ISymbol, IWithReference, IWithInnerSymbols, IWithIndex {

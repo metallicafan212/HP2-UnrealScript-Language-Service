@@ -196,9 +196,24 @@
                             "type": "class",
                             "extends": "Object"
                         },
-                        "Engine.Mesh": {
+						
+						"Engine.Primitive": {
                             "type": "class",
                             "extends": "Object"
+                        },
+						
+						"Engine.Box": {
+                            "type": "class",
+                            "extends": "Primitive"
+                        },
+						
+						"Engine.BoxPrim": {
+                            "type": "class",
+                            "extends": "Box"
+                        },
+						"Engine.Mesh": {
+                            "type": "class",
+                            "extends": "BoxPrim"
                         },
                         "Engine.MeshInstance": {
                             "type": "class",
@@ -232,10 +247,6 @@
                             "type": "class",
                             "extends": "Object"
                         },
-                        "Engine.Primitive": {
-                            "type": "class",
-                            "extends": "Object"
-                        },
                         "Engine.Client": {
                             "type": "class",
                             "extends": "Object"
@@ -247,7 +258,27 @@
                         "Engine.RenderDevice": {
                             "type": "class",
                             "extends": "Object"
-                        }
+                        },
+						
+						"Engine.Animation": {
+							"type": "class",
+							"extends": "Object"
+						},
+						
+						"Core.Transbuffer": {
+							"type": "class",
+							"extends": "Object"
+						},
+						
+						"Core.Textbuffer": {
+							"type": "class",
+							"extends": "Object"
+						},
+						
+						"Engine.Music": {
+							"type": "class",
+							"extends": "Object"
+						}
                     }
                 },
                 "unrealscript.indexPackageExtensions": {

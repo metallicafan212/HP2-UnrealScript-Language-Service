@@ -17,32 +17,43 @@ export enum ModifierFlags {
 	WithDimension		= 1 << 4, // A multiple dimension property
     Transient           = 1 << 6,
 
+	// Metallicafan212:	New property flags
+	EditConst			= 1 << 7,
+	Hidden				= 1 << 8,
+	NoTimeScale			= 1 << 9,
+	NoPersistent		= 1 << 10,
+	DoubleSize			= 1 << 11,
+
+	EightByteAlign		= 1 << 12,
+
+	Unsigned			= 1 << 13,
+
     // ParamFlags
-    Param               = 1 << 7,
-	ReturnParam			= 1 << 8,
-	Out 			    = 1 << 9,
-	Optional		    = 1 << 10,
-	Init 			    = 1 << 11, // NOT SUPPORTED
-	Skip			    = 1 << 12, // NOT SUPPORTED
-	Coerce			    = 1 << 13,
+    Param               = 1 << 14,
+	ReturnParam			= 1 << 15,
+	Out 			    = 1 << 16,
+	Optional		    = 1 << 17,
+	Init 			    = 1 << 18, // NOT SUPPORTED
+	Skip			    = 1 << 19, // NOT SUPPORTED
+	Coerce			    = 1 << 20,
     // XCom
-	Ref				    = 1 << 14, // NOT SUPPORTED
+	Ref				    = 1 << 21, // NOT SUPPORTED
 
     // LocalFlags
-    Local	            = 1 << 15,
+    Local	            = 1 << 22,
 
     // ClassFlags
-    Abstract            = 1 << 16,
+    Abstract            = 1 << 23,
 
     // InternalFlags
     // Not to be confused with the alternative keyword of "Native"
-    Intrinsic           = 1 << 17,
-    Generated           = 1 << 18,
-    Keyword             = 1 << 19,
-    NoDeclaration       = 1 << 20,
+    Intrinsic           = 1 << 24,
+    Generated           = 1 << 25,
+    Keyword             = 1 << 26,
+    NoDeclaration       = 1 << 27,
 
     // TODO: Track this modifier for various fields
-    Deprecated          = 1 << 21,
+    Deprecated          = 1 << 28,
 
     // A private method can however be re-defined!
     NonOverridable      = Private | Intrinsic, 

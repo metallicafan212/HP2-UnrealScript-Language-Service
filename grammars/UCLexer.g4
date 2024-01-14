@@ -122,6 +122,13 @@ KW_STRING: 'string';
 KW_NAME: 'name';
 KW_BOOL: 'bool';
 KW_POINTER: 'pointer';
+
+// Metallicafan212: HP2 specific
+KW_PTR: 'ptr';
+KW_DOUBLE: 'double';
+KW_QWORD: 'qword';
+KW_LAZYARRAY : 'lazyarray';
+
 KW_BUTTON: 'button';
 KW_EXTENDS: 'extends';
 KW_PUBLIC: 'public';
@@ -140,12 +147,30 @@ KW_LATENT: 'latent';
 KW_SINGULAR: 'singular';
 KW_STATIC: 'static';
 KW_EXEC: 'exec';
+
+// Metallicafan212: HP2 specific
+KW_ALLOWEDINMENUS: 'allowedinmenus';
+
 KW_ITERATOR: 'iterator';
 KW_SIMULATED: 'simulated';
 KW_AUTO: 'auto';
 KW_NOEXPORT: 'noexport';
 KW_NOEXPORTHEADER: 'noexportheader';
 KW_EDITCONST: 'editconst';
+
+// Metallicafan212:	More flags
+KW_HIDDEN: 'hidden';
+
+KW_NOPERSISTENT: 'nopersistent';
+
+KW_NOTIMESCALE: 'notimescale';
+
+KW_DOUBLESIZE: 'doublesize';
+
+KW_EIGHTBYTEALIGN: 'eightbytealign';
+
+KW_UNSIGNED: 'unsigned';
+
 KW_EDFINDABLE: 'edfindable';
 KW_EDITINLINE: 'editinline';
 KW_EDITINLINENOTIFY: 'editinlinenotify';

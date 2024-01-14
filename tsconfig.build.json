@@ -5,7 +5,8 @@
         "outDir": "out",
         "sourceMap": true,
         "declaration": false,
-        "moduleResolution": "Node",
+		"module": "NodeNext",
+        "moduleResolution": "NodeNext",
     },
     "include": [
         "client",
