@@ -247,8 +247,10 @@ export class DocumentAnalyzer extends DefaultSymbolWalker<void> {
         }
     }
 
-    override visitClass(symbol: UCClassSymbol) {
-        if (!this.isAllowed(UCSymbolKind.Class)) {
+    override visitClass(symbol: UCClassSymbol) 
+    {
+        if (!this.isAllowed(UCSymbolKind.Class)) 
+        {
             this.diagnostics.add({
                 range: symbol.getRange(),
                 message: {
@@ -261,13 +263,38 @@ export class DocumentAnalyzer extends DefaultSymbolWalker<void> {
         this.pushScope(symbol);
         super.visitClass(symbol);
         const className = symbol.getName();
-        if (className !== this.document.name) {
-            this.diagnostics.add({
+        
+        if (className !== this.document.name) 
+        {
+            // Metallicafan212: Debug this. It's calling this when the file has UC instead of uc
+            var daMsg = {
                 range: symbol.id.range,
                 message: diagnosticMessages.CLASS_NAME_0_MUST_MATCH_DOCUMENT_NAME_1,
                 args: [className.text, this.document.fileName]
-            });
+            };
+
+            // Metallicafan212: Add on the fields obtained
+            daMsg.message.text += " class name: " + className.text + ", document name: " + this.document.name.text;
+
+            this.diagnostics.add(daMsg);
         }
+        // Metallicafan212: Debugging not needed now
+        /*
+        else
+        {
+            var tempMsg = 
+            { 
+                range: symbol.getRange(),
+                message: 
+                {
+                    text: "Class name: " + className.text + ", document name: " + this.document.name.text,
+                    severity: DiagnosticSeverity.Information
+                }
+            };
+
+            this.diagnostics.add(tempMsg);
+        }
+        */
 
         // TODO: Maybe check for recursive issues?
         // if (symbol.dependsOnTypes) for (const type of symbol.dependsOnTypes) {

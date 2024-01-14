@@ -7,9 +7,6 @@
                 "--extensionDevelopmentPath=${workspaceRoot}"
             ],
             "name": "Launch Client No Watch",
-            "outFiles": [
-                "${workspaceRoot}/out/extension.js",
-            ],
             "sourceMaps": true,
             "autoAttachChildProcesses": true,
             "request": "launch",
@@ -21,9 +18,6 @@
                 "--extensionDevelopmentPath=${workspaceRoot}"
             ],
             "name": "Launch Client",
-            "outFiles": [
-                "${workspaceRoot}/out/extension.js",
-            ],
             "sourceMaps": true,
             "autoAttachChildProcesses": true,
             "preLaunchTask": {
@@ -36,10 +30,6 @@
         {
             "port": 6010,
             "name": "Attach to Server",
-            "outFiles": [
-                "${workspaceRoot}/out/server.js",
-                "!${workspaceRoot}/out/vendor.js"
-            ],
             "sourceMaps": true,
             "smartStep": false,
             "restart": true,

@@ -7,12 +7,22 @@ import * as url from 'url';
 import { DocumentUri } from 'vscode-languageserver';
 import { URI } from 'vscode-uri';
 
+import { UCLexer } from './antlr/generated/UCLexer';
+import { ProgramContext, UCParser } from './antlr/generated/UCParser';
+import { UCPreprocessorParser } from './antlr/generated/UCPreprocessorParser';
+import { IDiagnosticNode } from './diagnostics/diagnostic';
+import { DocumentASTWalker } from './documentASTWalker';
+import { applyMacroSymbols, config, IndexedReferencesMap } from './indexer';
+import { Name, NameHash, toName } from './name';
 import { UCErrorListener } from './Parser/ErrorListener';
 import { ERROR_STRATEGY } from './Parser/ErrorStrategy';
 import { UCInputStream } from './Parser/InputStream';
 import { UCTokenStream } from './Parser/TokenStream';
+import { UCGeneration } from './settings';
 import {
+    isStruct,
     ISymbol,
+    removeHashedSymbol,
     SymbolReference,
     SymbolsTable,
     UCClassSymbol,
@@ -20,17 +30,7 @@ import {
     UCPackage,
     UCStructSymbol,
     UCSymbolKind,
-    isStruct,
-    removeHashedSymbol,
 } from './Symbols';
-import { UCLexer } from './antlr/generated/UCLexer';
-import { ProgramContext, UCParser } from './antlr/generated/UCParser';
-import { UCPreprocessorParser } from './antlr/generated/UCPreprocessorParser';
-import { IDiagnosticNode } from './diagnostics/diagnostic';
-import { DocumentASTWalker } from './documentASTWalker';
-import { IndexedReferencesMap, applyMacroSymbols, config } from './indexer';
-import { Name, NameHash, toName } from './name';
-import { UCGeneration } from './settings';
 import { SymbolWalker } from './symbolWalker';
 
 function removeChildren(scope: UCStructSymbol) {
@@ -73,10 +73,16 @@ export class UCDocument {
     // List of symbols, including macro declarations.
     private readonly scope = new SymbolsTable<UCObjectSymbol>();
 
-    constructor(readonly filePath: string, public readonly classPackage: UCPackage) {
-        this.fileName = path.basename(filePath, '.uc');
-        this.name = toName(this.fileName);
-        this.uri = URI.file(filePath).toString();
+    constructor(readonly filePath: string, public readonly classPackage: UCPackage) 
+    {
+        // Metallicafan212: Fix issues with capitalized UC extensions
+        this.fileName   = path.basename(filePath);
+
+        // Metallicafan212: Second pass
+        this.fileName   = this.fileName.split(".")[0];
+
+        this.name       = toName(this.fileName);
+        this.uri        = URI.file(filePath).toString();
     }
 
     public enumerateSymbols() {
