@@ -278,12 +278,7 @@
 						"Engine.Music": {
 							"type": "class",
 							"extends": "Object"
-						},
-
-                        "Engine.BoundingBox": {
-                            "type": "class",
-                            "extends": "Primitive"
-                        }
+						}
                     }
                 },
                 "unrealscript.indexPackageExtensions": {
