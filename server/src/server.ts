@@ -26,12 +26,7 @@ import {
 
 import { ActiveTextDocuments } from './activeTextDocuments';
 import { buildCodeActions } from './codeActions';
-import {
-    getCompletionItems,
-    getFullCompletionItem,
-    getSignatureHelp,
-    updateIgnoredCompletionTokens,
-} from './completion';
+import { getCompletionItems, getFullCompletionItem, getSignatureHelp, updateIgnoredCompletionTokens } from './completion';
 import { EAnalyzeOption, UCLanguageServerSettings } from './configuration';
 import { getDocumentDiagnostics } from './documentDiagnostics';
 import { getDocumentHighlights } from './documentHighlight';
@@ -68,7 +63,7 @@ import {
     removeDocumentByPath,
 } from './UC/indexer';
 import { toName } from './UC/name';
-import { NAME_ARRAY, NAME_CLASS, NAME_FUNCTION, NAME_NONE } from './UC/names';
+import { NAME_ARRAY, NAME_CLASS, NAME_FUNCTION, NAME_LAZYARRAY, NAME_NONE } from './UC/names';
 import { IntrinsicSymbolItemMap, UCGeneration, UELicensee } from './UC/settings';
 import {
     addHashedSymbol,
@@ -756,6 +751,9 @@ function installIntrinsicSymbols(intrinsicSymbols: IntrinsicSymbolItemMap) {
                 let superStruct: UCStructSymbol | undefined;
                 switch (extendsName) {
                     case NAME_ARRAY:
+                        superStruct = IntrinsicArray;
+                        break;
+                    case NAME_LAZYARRAY:
                         superStruct = IntrinsicArray;
                         break;
 

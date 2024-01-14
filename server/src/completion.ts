@@ -1,47 +1,18 @@
 import * as c3 from 'antlr4-c3';
 import { Parser, ParserRuleContext } from 'antlr4ts';
 import { Token } from 'antlr4ts/Token';
-import { CompletionItem, CompletionItemKind, InsertTextFormat, InsertTextMode, SignatureHelp, SignatureInformation } from 'vscode-languageserver';
+import {
+    CompletionItem,
+    CompletionItemKind,
+    InsertTextFormat,
+    InsertTextMode,
+    SignatureHelp,
+    SignatureInformation,
+} from 'vscode-languageserver';
 import { DocumentUri, Position } from 'vscode-languageserver-textdocument';
 
-import { getCtxDebugInfo, getTokenDebugInfo } from './UC/Parser/Parser.utils';
-import {
-    ContextKind,
-    DefaultArray,
-    ISymbol,
-    Identifier,
-    MethodFlags,
-    ModifierFlags,
-    ObjectsTable,
-    UCClassSymbol,
-    UCConstSymbol,
-    UCDelegateSymbol,
-    UCEnumSymbol,
-    UCFieldSymbol,
-    UCMethodSymbol,
-    UCObjectSymbol,
-    UCObjectTypeSymbol,
-    UCQualifiedTypeSymbol,
-    UCScriptStructSymbol,
-    UCStateSymbol,
-    UCStructSymbol,
-    UCSymbolKind,
-    UCTypeKind,
-    areMethodsCompatibleWith,
-    findOrIndexClassSymbol,
-    getDebugSymbolInfo,
-    isClass,
-    isDelegateSymbol,
-    isEnumSymbol,
-    isField,
-    isFunction,
-    isMethodSymbol,
-    isPackage,
-    isStruct,
-    isTypeSymbol,
-    resolveType,
-    tryFindClassSymbol,
-} from './UC/Symbols';
+import { ActiveTextDocuments } from './activeTextDocuments';
+import { UCLanguageServerSettings } from './configuration';
 import { UCLexer } from './UC/antlr/generated/UCLexer';
 import { CallExpressionContext, ProgramContext, UCParser } from './UC/antlr/generated/UCParser';
 import { UCDocument } from './UC/document';
@@ -61,9 +32,45 @@ import {
 } from './UC/helpers';
 import { config, getDocumentByURI } from './UC/indexer';
 import { toName } from './UC/name';
+import { getCtxDebugInfo, getTokenDebugInfo } from './UC/Parser/Parser.utils';
 import { UCGeneration, UELicensee } from './UC/settings';
-import { ActiveTextDocuments } from './activeTextDocuments';
-import { UCLanguageServerSettings } from './configuration';
+import {
+    areMethodsCompatibleWith,
+    ContextKind,
+    DefaultArray,
+    findOrIndexClassSymbol,
+    getDebugSymbolInfo,
+    Identifier,
+    isClass,
+    isDelegateSymbol,
+    isEnumSymbol,
+    isField,
+    isFunction,
+    isMethodSymbol,
+    isPackage,
+    isStruct,
+    isTypeSymbol,
+    ISymbol,
+    MethodFlags,
+    ModifierFlags,
+    ObjectsTable,
+    resolveType,
+    tryFindClassSymbol,
+    UCClassSymbol,
+    UCConstSymbol,
+    UCDelegateSymbol,
+    UCEnumSymbol,
+    UCFieldSymbol,
+    UCMethodSymbol,
+    UCObjectSymbol,
+    UCObjectTypeSymbol,
+    UCQualifiedTypeSymbol,
+    UCScriptStructSymbol,
+    UCStateSymbol,
+    UCStructSymbol,
+    UCSymbolKind,
+    UCTypeKind,
+} from './UC/Symbols';
 
 /** If the candidates collector hits any these it'll stop at the first occurance. */
 const PreferredRulesSet = new Set([
@@ -730,6 +737,7 @@ async function buildCompletionItems(
                                 case UCTypeKind.Pointer:
                                 case UCTypeKind.Enum:
                                 case UCTypeKind.Struct:
+                                case UCTypeKind.LazyArray:
                                     candidates.tokens.delete(UCParser.NONE_LITERAL);
                                     break;
                             }

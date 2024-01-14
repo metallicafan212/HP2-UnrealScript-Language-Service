@@ -55,6 +55,7 @@ import {
     NAME_DEFAULTPROPERTIES,
     NAME_DELEGATE,
     NAME_ENUMCOUNT,
+    NAME_LAZYARRAY,
     NAME_MAP,
     NAME_NONE,
     NAME_REPLICATION,
@@ -392,6 +393,24 @@ export class DocumentASTWalker extends AbstractParseTreeVisitor<any> implements 
                 }
                 return arrayType;
             }
+
+            // Metallicafan212: Lazy array was added as a native type, to make alignments easier
+            case UCGrammar.UCParser.RULE_lazyArrayType:
+                {
+                    const identifier: Identifier = {
+                        name: NAME_LAZYARRAY,
+                        range: rangeFromBound(rule.start)
+                    };
+                    const arrayType = new UCArrayTypeSymbol(identifier, rangeFromBounds(rule.start, rule.stop));
+    
+                    const baseTypeNode = (rule as UCGrammar.ArrayTypeContext).varType();
+                    if (baseTypeNode) 
+                    {
+                        const innerType: ITypeSymbol | undefined = this.visitTypeDecl(baseTypeNode.typeDecl());
+                        arrayType.baseType = innerType;
+                    }
+                    return arrayType;
+                }
 
             case UCGrammar.UCParser.RULE_delegateType: {
                 const identifier: Identifier = {

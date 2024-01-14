@@ -234,6 +234,7 @@ KW_POSTOPERATOR: 'postoperator';
 KW_SELF: 'self';
 KW_SUPER: 'super';
 KW_EXPANDS: 'expands';
+KW_BASED: 'based on';
 KW_IMPLEMENTS: 'implements';
 KW_DEPENDSON: 'dependson';
 KW_K2CALL: 'k2call';

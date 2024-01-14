@@ -111,6 +111,7 @@ identifier
 	// | 'none'
 	| 'extends'
 	| 'expands'
+	| 'based on'
 	| 'public'
 	| 'protected'
 	| 'protectedwrite'
@@ -300,8 +301,8 @@ classDecl
 		SEMICOLON
 	;
 
-extendsClause: ('extends' | 'expands') id=identifier;
-qualifiedExtendsClause: ('extends' | 'expands') id=qualifiedIdentifier;
+extendsClause: ('extends' | 'expands' | 'based on') id=identifier;
+qualifiedExtendsClause: ('extends' | 'expands' | 'based on') id=qualifiedIdentifier;
 qualifiedWithinClause: 'within' id=qualifiedIdentifier;
 
 // UC3+
@@ -589,6 +590,7 @@ typeDecl
     | stringType
 	| classType
 	| arrayType
+	| lazyArrayType
 	| delegateType
 	| mapType
 	| enumDecl 		// Only allowed as a top-scope member.
@@ -608,7 +610,6 @@ primitiveType
 	| 'ptr'
 	| 'button' // alias for a string with an input modifier
 	| 'qword'
-	| 'lazyarray'
 	;
 
 stringType
@@ -618,6 +619,10 @@ stringType
 // Note: inlinedDeclTypes includes another arrayGeneric!
 arrayType
 	: 'array' (LT varType GT)
+	;
+
+lazyArrayType
+	: 'lazyarray' (LT varType GT)
 	;
 
 classType
